@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  deno:
+    image: deno
+    restart: always
+    command: run --allow-net --allow-env --watch server.ts
+    volumes:
+      - ./app/src:/usr/src/app
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
